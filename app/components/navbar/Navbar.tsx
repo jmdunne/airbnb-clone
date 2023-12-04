@@ -1,3 +1,5 @@
+"use client";
+
 import Container from "../Container";
 import React from "react";
 import Logo from "./Logo";
