@@ -20,9 +20,10 @@ const UserMenu = () => {
           className="
                     p-4
                     md:py-1
-                    md:py-2
+                    md:px-2
                     border-[1px]
                     border-neutral-200
+                    flex
                     flex-row
                     items-center
                     gap-3
@@ -33,7 +34,9 @@ const UserMenu = () => {
                 "
         >
           <AiOutlineMenu />
-          <div className="hidden md:block"></div>
+          <div className="hidden md:block">
+            <Avatar />
+          </div>
         </div>
       </div>
     </div>
