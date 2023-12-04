@@ -1,5 +1,6 @@
 import Container from '../Container'
 import React from 'react'
+import Logo from './Logo'
 
 const NavBar = () => {
   return (
@@ -10,7 +11,17 @@ const NavBar = () => {
            '
         >
         <Container>
-            Anything
+            <div
+                className='
+                    flex
+                    flex-row
+                    items-center
+                    justify-between
+                    gap-3
+                    md:gap-0'
+            >
+                <Logo />
+            </div>
         </Container>    
         </div>
     </div>
