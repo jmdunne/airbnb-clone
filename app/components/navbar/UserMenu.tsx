@@ -18,15 +18,16 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleOpen = useCallback(() => {
-    setIsOpen((value) => !value);
-  }, []);
+  const toggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal]);
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => {}}
+          onClick={toggle}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100
             transition
             cursor-pointer"
@@ -34,7 +35,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           Airbnb your home
         </div>
         <div
-          onClick={toggleOpen}
+          onClick={toggle}
           className="
                     p-4
                     md:py-1
