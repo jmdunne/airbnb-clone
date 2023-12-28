@@ -18,6 +18,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggleOpen = useCallback(() => {
+    setIsOpen((value) => !value);
+  }, []);
+
   const toggle = useCallback(() => {
     registerModal.onClose();
     loginModal.onOpen();
@@ -35,7 +39,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           Airbnb your home
         </div>
         <div
-          onClick={toggle}
+          onClick={toggleOpen}
           className="
                     p-4
                     md:py-1
