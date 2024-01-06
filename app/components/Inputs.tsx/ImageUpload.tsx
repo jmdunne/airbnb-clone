@@ -49,7 +49,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
       gap-4
       text-neutral-600"
           >
-            <TbPhotoPlus />
+            <TbPhotoPlus size={50} />
+            <div className="font-semibold text-lg">Click to upload</div>
           </div>
         );
       }}
