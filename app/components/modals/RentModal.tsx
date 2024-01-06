@@ -12,6 +12,7 @@ import { on } from "events";
 import CountrySelect from "../Inputs.tsx/CountrySelect";
 import dynamic from "next/dynamic";
 import Counter from "../Inputs.tsx/Counter";
+import ImageUpload from "../Inputs.tsx/ImageUpload";
 
 enum STEPS {
   CATEGORY = 0,
