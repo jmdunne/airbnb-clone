@@ -7,7 +7,7 @@ import { use, useMemo, useState } from "react";
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../Inputs.tsx/CategoryInput";
-import { FieldValues, set, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, set, useForm } from "react-hook-form";
 import { on } from "events";
 import CountrySelect from "../Inputs.tsx/CountrySelect";
 import dynamic from "next/dynamic";
@@ -81,6 +81,12 @@ const RentModal = () => {
 
   const onNext = () => {
     setStep((value) => value + 1);
+  };
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (step != STEPS.PRICE) {
+      return onNext();
+    }
   };
 
   const actionLabel = useMemo(() => {
