@@ -38,9 +38,11 @@ export async function POST(request: Request) {
       roomCount,
       bathroomCount,
       guestCount,
-      location,
-      price,
+      locationValue: location.value,
+      price: parseInt(price, 10),
       userId: currentUser.id,
     },
   });
+
+  return NextResponse.json(listing);
 }
