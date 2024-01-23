@@ -1,6 +1,7 @@
 import getListings from "./actions/getListings";
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
+import ListingCard from "./components/listings/ListingCard";
 import EmptyState from "./components/navbar/EmptyState";
 
 export default async function Home() {
@@ -30,7 +31,7 @@ export default async function Home() {
         gap-8"
         >
           {listings.map((listing: any) => {
-            return <div>{listing.title}</div>;
+            return <ListingCard key={listing.id} data={listing} />;
           })}
         </div>
       </Container>
