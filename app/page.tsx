@@ -29,7 +29,9 @@ export default async function Home() {
         2xl:grid-cols-6 
         gap-8"
         >
-          <div>My future listings</div>
+          {listings.map((listing: any) => {
+            return <div>{listing.title}</div>;
+          })}
         </div>
       </Container>
     </ClientOnly>
