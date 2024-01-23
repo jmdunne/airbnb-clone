@@ -1,26 +1,81 @@
+"use client";
+
+// Importing necessary hooks, types and libraries
+import useCountries from "@/app/hooks/useCountries";
 import { SafeUser } from "@/app/types";
 import { Listing, Reservation } from "@prisma/client";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useCallback, useMemo } from "react";
 
+import { format } from "date-fns";
+
+// Define the props for the ListingCard component
 interface ListingCardProps {
-  data: Listing;
-  reservation?: Reservation;
-  onAction?: (id: string) => void;
-  disabled?: boolean;
-  actionLabel?: string;
-  actionId?: string;
-  currentUser?: SafeUser | null;
+  data: Listing; // Main data for the listing
+  reservation?: Reservation; // Optional reservation made on the listing
+  onAction?: (id: string) => void; // Optional callback for an action on the card
+  disabled?: boolean; // Optional prop to disable interactions
+  actionLabel?: string; // Optional prop to customize the action button label
+  actionId?: string; // Optional prop to pass an ID to the onAction callback
+  currentUser?: SafeUser | null; // Current user, can be a SafeUser object or null
 }
 
+// Define the ListingCard component
 const ListingCard: React.FC<ListingCardProps> = ({
   data,
   reservation,
   onAction,
   disabled,
   actionLabel,
-  actionId,
+  actionId = "",
   currentUser,
 }) => {
+  const router = useRouter(); // Hook for routing
+  const { getbyValue } = useCountries(); // Hook to fetch country data
+
+  // Get the location data by value
+  const location = getbyValue(data.locationValue);
+
+  // Define the callback for the cancel action
+  const handleCancel = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation(); // Stop event propagation
+
+      // If the card is disabled, return early
+      if (disabled) {
+        return;
+      }
+
+      // Call the onAction callback with the actionId
+      onAction?.(actionId);
+    },
+    [disabled, onAction, actionId] // Include actionId in the dependency array
+  );
+
+  // Use the useMemo hook to optimize performance by memoizing the price calculation.
+  // If a reservation exists, use the totalPrice of the reservation.
+  // If there's no reservation, use the price from the data object.
+  // The useMemo hook will only re-run the calculation if the reservation or data changes.
+  const price = useMemo(() => {
+    if (reservation) {
+      return reservation.totalPrice;
+    }
+
+    return data.price;
+  }, [reservation, data]);
+
+  const reservationDate = useMemo(() => {
+    if (!reservation) {
+      return null;
+    }
+
+    const start = new Date(reservation.startDate);
+    const end = new Date(reservation.endDate);
+
+    return `${format(start, "PP")} - ${format(end, "PP")}`;
+  }, [reservation]);
+
+  // Return the component markup
   return <div>ListingCard</div>;
 };
 
