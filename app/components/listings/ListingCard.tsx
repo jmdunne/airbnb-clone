@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";
 
 import { format } from "date-fns";
+import Image from "next/image";
 
 // Define the props for the ListingCard component
 interface ListingCardProps {
@@ -76,7 +77,44 @@ const ListingCard: React.FC<ListingCardProps> = ({
   }, [reservation]);
 
   // Return the component markup
-  return <div>ListingCard</div>;
+  return (
+    <div
+      onClick={() => router.push(`/listings/${data.id}`)}
+      className="
+    col-span-1
+    cursor-pointer
+    group"
+    >
+      <div
+        className="
+            flex
+            flex-col
+            gap-2
+            w-full"
+      >
+        <div
+          className="
+                aspect square
+                w-full
+                relative
+                overflow-hidden
+                rounded-xl"
+        >
+          <Image
+            fill
+            alt="Listing"
+            src={data.imageSrc}
+            className="
+                object-cover
+                h-full
+                w-full
+                group-hover:scale-110
+                transition"
+          />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ListingCard;
