@@ -9,6 +9,7 @@ import React, { useCallback, useMemo } from "react";
 
 import { format } from "date-fns";
 import Image from "next/image";
+import HeartButton from "../HeartButton";
 
 // Define the props for the ListingCard component
 interface ListingCardProps {
@@ -110,7 +111,9 @@ const ListingCard: React.FC<ListingCardProps> = ({
             top-3
             right-3
           "
-          ></div>
+          >
+            <HeartButton listingId={data.id} currentUser={currentUser} />
+          </div>
         </div>
       </div>
     </div>
